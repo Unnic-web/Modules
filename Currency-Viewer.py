@@ -21,11 +21,11 @@ from telethon.tl.types import Message
 import requests
 import asyncio
 
-class ВалютаMod(loader.Module):
+class CurrencyMod(loader.Module):
     """Модуль для просмотра валют"""
 
     strings = {
-        "name": "Валюта",
+        "name": "Currency",
         "inc_args": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Неправильные аргументы</b>",
         "keyerror": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Возможно, валюта отсутствует в базе данных сайта или вы ввели неправильное название.</b>",
         "currency_not_supported": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Данная валюта не поддерживается. Пожалуйста, проверьте правильность названия.</b>"
