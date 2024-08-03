@@ -58,7 +58,7 @@ class CurrencyMod(loader.Module):
                 "<emoji document_id=5447309366568953338>🇺🇦</emoji> <code>{}₴ </code> Гривен\n"
                 "<emoji document_id=5228718354658769982>🇰🇿</emoji> <code>{}₸ </code> Тенге\n"
                 "<emoji document_id=5228784522924930237>🇪🇺</emoji> <code>{}€ </code> Евро\n"
-                "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун/\n"
+                "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун\n"
                 "<emoji document_id=5253691721174234015>💎</emoji> <code>{}₮ </code> Тонкоин\n"
                 "<emoji document_id=5379965911455256722>💎</emoji> <code>{}₵ </code> Ноткоин\n"
             ).format(
