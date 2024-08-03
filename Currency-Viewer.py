@@ -16,6 +16,8 @@ __version__ = (1, 0, 0)
 #╚██████╔╝██║░╚███║██║░╚███║██║╚█████╔╝
 #░╚═════╝░╚═╝░░╚══╝╚═╝░░╚══╝╚═╝░╚════╝
 
+version = (1, 0, 0)
+# meta developer: @unnic
 from .. import loader, utils
 from telethon.tl.types import Message
 import requests
@@ -27,7 +29,8 @@ class CurrencyMod(loader.Module):
     strings = {
         "name": "Currency",
         "inc_args": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Неправильные аргументы</b>",
-        "keyerror": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Возможно, валюта отсутствует в базе данных сайта или вы ввели неправильное название.</b>"
+        "keyerror": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Возможно, валюта отсутствует в базе данных сайта или вы ввели неправильное название.</b>",
+        "currency_not_supported": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Данная валюта не поддерживается. Пожалуйста, проверьте правильность названия.</b>"
     }
 
     async def cryptocmd(self, message: Message):
@@ -45,10 +48,14 @@ class CurrencyMod(loader.Module):
             args_list = ["1", args_list[0]]
         
         currency = args_list[1].upper()
-        api = requests.get(
-            f"https://min-api.cryptocompare.com/data/price?fsym={currency}&tsyms=USD,RUB,UAH,KZT,EUR,BYN,TON,NOT"
-        ).json()
+        api_url = f"https://min-api.cryptocompare.com/data/price?fsym={currency}&tsyms=USD,RUB,UAH,KZT,EUR,BYN,TON,NOT"
+        api_response = requests.get(api_url).json()
 
+        # Проверяем, доступна ли валюта
+        if 'Response' in api_response and api_response['Response'] == 'Error':
+            await utils.answer(message, self.strings("currency_not_supported"))
+            return
+        
         try:
             count = float(args_list[0])
             form = (
@@ -58,20 +65,20 @@ class CurrencyMod(loader.Module):
                 "<emoji document_id=5447309366568953338>🇺🇦</emoji> <code>{}₴ </code> Гривна\n"
                 "<emoji document_id=5228718354658769982>🇰🇿</emoji> <code>{}₸ </code> Тенге\n"
                 "<emoji document_id=5228784522924930237>🇪🇺</emoji> <code>{}€ </code> Евро\n"
-                "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун\n"
+                "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун/\n"
                 "<emoji document_id=5253691721174234015>💎</emoji> <code>{}₮ </code> Тонкоин\n"
                 "<emoji document_id=5379965911455256722>💎</emoji> <code>{}₵ </code> Ноткоин\n"
             ).format(
                 count,
                 currency,
-                round(api.get("USD", 0) * count, 2),
-                round(api.get("RUB", 0) * count, 2),
-                round(api.get("UAH", 0) * count, 2),
-                round(api.get("KZT", 0) * count, 2),
-                round(api.get("EUR", 0) * count, 2),
-                round(api.get("BYN", 0) * count, 2),
-                round(api.get("TON", 0) * count, 2),
-                round(api.get("NOT", 0) * count, 2) 
+                round(api_response.get("USD", 0) * count, 2),
+                round(api_response.get("RUB", 0) * count, 2),
+                round(api_response.get("UAH", 0) * count, 2),
+                round(api_response.get("KZT", 0) * count, 2),
+                round(api_response.get("EUR", 0) * count, 2),
+                round(api_response.get("BYN", 0) * count, 2),
+                round(api_response.get("TON", 0) * count, 2),
+                round(api_response.get("NOT", 0) * count, 2) 
             )
 
             result_message = await utils.answer(message, form)
