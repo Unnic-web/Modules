@@ -55,7 +55,7 @@ class CurrencyMod(loader.Module):
                 "<b>Поиск по курсу: {} {}</b>\n<b>Свежие результаты:</b>\n\n"
                 "<emoji document_id=5202021044105257611>🇺🇸</emoji> <code>{}$ </code> Долар\n"
                 "<emoji document_id=5449408995691341691>🇷🇺</emoji> <code>{}₽ </code> Рубль\n"
-                "<emoji document_id=5447309366568953338>🇺🇦</emoji> <code>{}₴ </code> Гривен\n"
+                "<emoji document_id=5447309366568953338>🇺🇦</emoji> <code>{}₴ </code> Гривна\n"
                 "<emoji document_id=5228718354658769982>🇰🇿</emoji> <code>{}₸ </code> Тенге\n"
                 "<emoji document_id=5228784522924930237>🇪🇺</emoji> <code>{}€ </code> Евро\n"
                 "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун\n"
