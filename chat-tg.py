@@ -88,16 +88,16 @@ class БылMod(loader.Module):
         admin_mentions = [f"<a href='tg://user?id={admin.id}'>.</a>" for admin in real_admins]
 
         await message.edit(" ".join(admin_mentions))
-
+        
        async def хелпcmd(self, message: Message):
         """Показать информацию по командам"""
         instruction = (
             "Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
-            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата."
+            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.\n"
         )
+
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
         await asyncio.sleep(10)
         await sent_message.delete()
-
