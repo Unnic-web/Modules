@@ -70,8 +70,8 @@ class БылMod(loader.Module):
         user_id = user.id
         await message.edit(f'<emoji document_id=5972282179776940830>✈️</emoji> <a href="tg://openmessage?user_id={user_id}"><b>{user_initials}</b></a>\n<emoji document_id=4918133202012340741>👤</emoji> <code>@{user_id}</code>')
 
-    async def тегcmd(self, message: Message):
-        """Тегает всех админов чата, игнорируя ботов"""
+   async def тегcmd(self, message: Message):
+        """Тегает всех администраторов чата, игнорируя ботов"""
         if not message.chat:
             await message.edit("<b>Ошибка!</b>")
             return
