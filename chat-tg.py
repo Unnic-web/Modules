@@ -89,14 +89,15 @@ class БылMod(loader.Module):
 
         await message.edit(" ".join(admin_mentions))
 
-        async def хелпcmd(self, message: Message):
+       async def хелпcmd(self, message: Message):
         """Показать информацию по командам"""
         instruction = (
-            "<b>Информация:\n\n"
+            "Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
-            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>"
+            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата."
         )
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
         await asyncio.sleep(10)
         await sent_message.delete()
+
