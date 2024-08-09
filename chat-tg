@@ -87,7 +87,7 @@ class БылMod(loader.Module):
             return
 
         # Просто тегаем настоящих администраторов
-        admin_mentions = [f"<a href='tg://user?id={admin.id}'>{admin.first_name or 'пользователь'}</a>" for admin in real_admins]
+        admin_mentions = [f"<a href='tg://user?id={admin.id}'>.</a>" for admin in real_admins]
 
         await message.edit(" ".join(admin_mentions))
 
