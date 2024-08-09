@@ -12,6 +12,7 @@ class БылMod(loader.Module):
 
     strings = {
         "name": "Был",
+        "author": "@HikkTutor"
     }
 
     def init(self):
@@ -35,14 +36,16 @@ class БылMod(loader.Module):
         f.name = f"Dump by {chat.id}.csv"
         f.write("FNAME;LNAME;USER;ID;NUMBER\n".encode())
         me = await message.client.get_me()
-        for i in await message.client.get_participants(message.to_id):
+        participants = await message.client.get_participants(message.to_id)
+        
+        for i in participants:
             if i.id == me.id:
                 continue
             f.write(
-                f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
+                f"{str(i.first_name) or ''};{str(i.last_name) or ''};{str(i.username) or ''};{str(i.id)};{str(i.phone) or ''}\n".encode()
             )
         f.seek(0)
-        await message.client.send_file("me", f, caption="Перезагрузка." + str(chat.id))
+        await message.client.send_file("me", f, caption=f"Перезагрузка чата: {chat.id}")
 
         await message.edit("<b>Сделал то что ты хотел, лог в избранном.</b>")
         f.close()
@@ -57,7 +60,7 @@ class БылMod(loader.Module):
         elif args:
             try:
                 user = await message.client.get_entity(args)
-            except ValueError:
+            except Exception:
                 await message.edit("<b>Ошибка</b>")
                 return
         else:
@@ -84,17 +87,18 @@ class БылMod(loader.Module):
             return
 
         # Просто тегаем настоящих администраторов
-        admin_mentions = [f"<a href='tg://user?id={admin.id}'>.</a>" for admin in real_admins]
+        admin_mentions = [f"<a href='tg://user?id={admin.id}'>{admin.first_name or 'пользователь'}</a>" for admin in real_admins]
 
         await message.edit(" ".join(admin_mentions))
 
     async def хелпcmd(self, message: Message):
-        """Показать информацию по команде .лог"""
+        """Показать информацию по командам"""
         instruction = (
             "<b>Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
-            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>\n\"
+            "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>"
         )
+
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
         await asyncio.sleep(10)
