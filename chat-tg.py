@@ -8,11 +8,11 @@ from .. import loader, utils
 
 @loader.tds
 class БылMod(loader.Module):
-    """Разнообразный модуль для групп"""
+    """Разнообразный модуль"""
 
     strings = {
         "name": "Был",
-        "author": "@HikkTutor"
+        "author": "@HikkTutor",
     }
 
     def init(self):
@@ -36,16 +36,14 @@ class БылMod(loader.Module):
         f.name = f"Dump by {chat.id}.csv"
         f.write("FNAME;LNAME;USER;ID;NUMBER\n".encode())
         me = await message.client.get_me()
-        participants = await message.client.get_participants(message.to_id)
-        
-        for i in participants:
+        for i in await message.client.get_participants(message.to_id):
             if i.id == me.id:
                 continue
             f.write(
-                f"{str(i.first_name) or ''};{str(i.last_name) or ''};{str(i.username) or ''};{str(i.id)};{str(i.phone) or ''}\n".encode()
+                f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
             )
         f.seek(0)
-        await message.client.send_file("me", f, caption=f"Перезагрузка чата: {chat.id}")
+        await message.client.send_file("me", f, caption="Перезагрузка." + str(chat.id))
 
         await message.edit("<b>Сделал то что ты хотел, лог в избранном.</b>")
         f.close()
@@ -60,7 +58,7 @@ class БылMod(loader.Module):
         elif args:
             try:
                 user = await message.client.get_entity(args)
-            except Exception:
+            except ValueError:
                 await message.edit("<b>Ошибка</b>")
                 return
         else:
@@ -70,7 +68,7 @@ class БылMod(loader.Module):
         user_id = user.id
         await message.edit(f'<emoji document_id=5972282179776940830>✈️</emoji> <a href="tg://openmessage?user_id={user_id}"><b>{user_initials}</b></a>\n<emoji document_id=4918133202012340741>👤</emoji> <code>@{user_id}</code>')
 
-   async def тегcmd(self, message: Message):
+    async def тегcmd(self, message: Message):
         """Тегает всех администраторов чата, игнорируя ботов"""
         if not message.chat:
             await message.edit("<b>Ошибка!</b>")
@@ -91,14 +89,13 @@ class БылMod(loader.Module):
 
         await message.edit(" ".join(admin_mentions))
 
-    async def хелпcmd(self, message: Message):
+        async def хелпcmd(self, message: Message):
         """Показать информацию по командам"""
         instruction = (
             "<b>Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
             "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>"
         )
-
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
         await asyncio.sleep(10)
