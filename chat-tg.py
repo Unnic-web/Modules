@@ -90,7 +90,7 @@ class БылMod(loader.Module):
                 online_admins.append(admin)
 
         if not online_admins:
-            await message.edit("<b>Нет администраторов в сети в этом чате.</b>")
+            await message.edit("<b>Нет админов в сети в этом чате.</b>")
             return
 
         # Просто тегаем настоящих администраторов в сети
