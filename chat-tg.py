@@ -99,7 +99,7 @@ class БылMod(loader.Module):
         await message.edit(" ".join(admin_mentions))
         
     async def хелпcmd(self, message: Message):
-        """Показать информацию по командам"""
+        """Показать информацию по команде .лог"""
         instruction = (
             "<b>Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
