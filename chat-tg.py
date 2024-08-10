@@ -89,7 +89,7 @@ class БылMod(loader.Module):
 
         await message.edit(" ".join(admin_mentions))
         
-       async def хелпcmd(self, message: Message):
+    async def хелпcmd(self, message: Message):
         """Показать информацию по командам"""
         instruction = (
             "Информация:\n\n"
