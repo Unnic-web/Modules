@@ -4,7 +4,6 @@ from telethon import TelegramClient
 from telethon.tl.custom import Message
 from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
-from telethon.tl.functions.users import GetFullUser
 from .. import loader, utils
 
 @loader.tds
@@ -83,28 +82,19 @@ class БылMod(loader.Module):
             await message.edit("<b>Нет администраторов в этом чате.</b>")
             return
 
-        online_admins = []
-        for admin in real_admins:
-            user_full = await self._client(GetFullUser(admin.id))
-            if user_full.user.status and (user_full.user.status.was_online is None):
-                online_admins.append(admin)
-
-        if not online_admins:
-            await message.edit("<b>Нет админов в сети в этом чате.</b>")
-            return
-
-        # Просто тегаем настоящих администраторов в сети
-        admin_mentions = [f"<a href='tg://user?id={admin.id}'>.</a>" for admin in online_admins]
+        # Просто тегаем настоящих администраторов
+        admin_mentions = [f"<a href='tg://user?id={admin.id}'>.</a>" for admin in real_admins]
 
         await message.edit(" ".join(admin_mentions))
         
     async def хелпcmd(self, message: Message):
-        """Показать информацию по команде .лог"""
+        """Показать информацию по командам"""
         instruction = (
             "<b>Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
             "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>\n"
         )
+
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
         await asyncio.sleep(10)
