@@ -1,3 +1,5 @@
+__version__ = (2, 0, 0)
+# meta developer: @unnic
 import io
 import asyncio
 from telethon import TelegramClient
