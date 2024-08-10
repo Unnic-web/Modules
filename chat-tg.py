@@ -79,7 +79,7 @@ class БылMod(loader.Module):
         real_admins = [admin for admin in admins if not admin.bot]
 
         if not real_admins:
-            await message.edit("<b>Нет администраторов в этом чате.</b>")
+            await message.edit("<b>Нет админов в этом чате.</b>")
             return
 
         # Просто тегаем настоящих администраторов
