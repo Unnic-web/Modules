@@ -11,7 +11,7 @@ class БылMod(loader.Module):
     """Модуль для групп"""
 
     strings = {
-        "name": "Был",
+        "name": "Был"
     }
 
     def init(self):
@@ -22,8 +22,7 @@ class БылMod(loader.Module):
     async def client_ready(self, client: TelegramClient, db):
         self._db = db
         self._client = client
-        await client(JoinChannelRequest(channel=self.strings["author"]))
-
+        
     async def логcmd(self, message: Message):
         """Прежде чем, прочти инструкцию"""
         if not message.chat:
