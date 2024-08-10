@@ -99,5 +99,5 @@ class БылMod(loader.Module):
 
         sent_message = await self._client.send_message(message.chat_id, instruction)
 
-        await asyncio.sleep(4)
+        await asyncio.sleep(5)
         await sent_message.delete()
