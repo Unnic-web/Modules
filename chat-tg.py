@@ -99,3 +99,5 @@ class БылMod(loader.Module):
 
         await asyncio.sleep(10)
         await sent_message.delete()
+
+# Пашёл нахуй
