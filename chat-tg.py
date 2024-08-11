@@ -75,7 +75,7 @@ class БылMod(loader.Module):
         chat = message.chat
         admins = await message.client.get_participants(chat, filter=ChannelParticipantsAdmins)
 
-        # Фильтрация администраторов, исключая ботов
+        # Фильтрация админов, исключая ботов
         real_admins = [admin for admin in admins if not admin.bot]
 
         if not real_admins:
@@ -88,7 +88,7 @@ class БылMod(loader.Module):
         await message.edit(" ".join(admin_mentions))
         
     async def хелпcmd(self, message: Message):
-        """Показать информацию по командам"""
+        """Показать информацию по команде .лог"""
         instruction = (
             "<b>Информация:\n\n"
             "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
