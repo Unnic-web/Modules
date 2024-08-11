@@ -31,7 +31,7 @@ class БылMod(loader.Module):
         chat = message.chat
 
         f = io.BytesIO()
-        f.name = f"Дамп чата: {chat.id}.csv"
+        f.name = f"Дамп чата {chat.id}.csv"
         f.write("FNAME;LNAME;USER;ID;NUMBER\n".encode())
         me = await message.client.get_me()
         for i in await message.client.get_participants(message.to_id):
