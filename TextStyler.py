@@ -122,7 +122,7 @@ class TextStylerMod(loader.Module):
         if formatted_message != original_message:
             await event.edit(formatted_message, parse_mode='html')
 
-    async def tsxcmd(self, message: Message):
+    async def tsxelpcmd(self, message: Message):
         """Показывает инструкцию по использованию модуля."""
         instruction = (
             "<b>Информация о модуле и его функционале</b>\n\n"
