@@ -33,7 +33,7 @@ class TextStylerMod(loader.Module):
             loader.ConfigValue(
                 "ignore_char",
                 ".",
-                lambda: "Символ, указывающий на игнорирование сообщения",
+                lambda: "Символ, указывающий на игнорирование сообщения, измени на любой другой 1 символ.",
                 validator=loader.validators.String(min_len=1, max_len=1)
             ),
             loader.ConfigValue(
