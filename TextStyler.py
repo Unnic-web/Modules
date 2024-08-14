@@ -137,3 +137,4 @@ class TextStylerMod(loader.Module):
             "<emoji document_id=4971987363145188045>🛑</emoji> <b>Ты можешь включить/выключить игнор для каналов.</b>\n"
         )
         await message.edit(instruction, parse_mode='html')
+# Хер
