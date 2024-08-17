@@ -38,7 +38,7 @@ class AnimatedTextMod(loader.Module):
 
 @staticmethod
 def text_to_emoji_1(text):
-    """Эмодзи версия 1"""
+    """<b>Эмодзи версия 1</b>"""
     emoji_alphabet = {
         'А': '<emoji document_id=5296400742821673630>💙</emoji>', 'Б': '<emoji document_id=5298988894409211234>🩵</emoji>',
         'В': '<emoji document_id=5296522230266608839>💙</emoji>', 'Г': '<emoji document_id=5296501425445027568>🩵</emoji>',
@@ -67,7 +67,7 @@ def text_to_emoji_1(text):
 
 @staticmethod
 def text_to_emoji_2(text):
-    """Эмодзи версия 2"""
+    """<b>Эмодзи версия 2</b>"""
     emoji_alphabet = {
         'А': '<emoji document_id=5442667851246742007>🔤</emoji>', 'Б': '<emoji document_id=5442708515997100433>🔤</emoji>',
         'В': '<emoji document_id=5449413294953606262>🔤</emoji>', 'Г': '<emoji document_id=5452141660043488430>🔤</emoji>',
@@ -96,7 +96,7 @@ def text_to_emoji_2(text):
 
 @staticmethod
 def text_to_emoji_3(text):
-    """Эмодзи версия 3"""
+    """<b>Эмодзи версия 3</b>"""
     emoji_alphabet = {
         'А': '<emoji document_id=5242434345603441736>😀</emoji>', 'Б': '<emoji document_id=5242670122128123193>😤</emoji>',
         'В': '<emoji document_id=5242247729274432503>🤔</emoji>', 'Г': '<emoji document_id=5242715811990218731>😞</emoji>',
