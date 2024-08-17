@@ -93,6 +93,7 @@ class AnimatedTextMod(loader.Module):
             '5': '<emoji document_id=5238171599152097811>5️⃣</emoji>', '6': '<emoji document_id=5235500881113263583>6️⃣</emoji>',
             '7': '<emoji document_id=5237875542761417785>7️⃣</emoji>', '8': '<emoji document_id=5238067300166281132>8️⃣</emoji>',
             '9': '<emoji document_id=5237872922831367023>9️⃣</emoji>',
+        }
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
     @staticmethod
