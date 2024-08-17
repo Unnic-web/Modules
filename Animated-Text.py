@@ -96,7 +96,7 @@ class AnimatedTextMod(loader.Module):
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
     @staticmethod
-    def text_to_emoji_2(text):
+    def text_to_emoji_3(text):
         """<b>Эмодзи версия 3</b>"""
         emoji_alphabet = {
             'А': '<emoji document_id=5242434345603441736>😀</emoji>', 'Б': '<emoji document_id=5242670122128123193>😤</emoji>',
