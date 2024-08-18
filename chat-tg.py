@@ -1,3 +1,7 @@
+#ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ© Copyright 2024
+#ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤhttps://t.me/unnic
+# 🔒ㅤㅤㅤㅤㅤLicensed under the GNU AGPLv3
+# 🌐ㅤㅤhttps://www.gnu.org/licenses/agpl-3.0.html
 import io
 import asyncio
 from telethon import TelegramClient
