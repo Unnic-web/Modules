@@ -126,8 +126,8 @@ class AnimatedTextMod(loader.Module):
 
         await message.edit(emojified_text)
 
-async def atxelpcmd(self, message: Message):
-    """Информация о модуле"""
+    async def atxelpcmd(self, message: Message):
+        """Информация о модуле"""
     
     try:
         instruction = (
