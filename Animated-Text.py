@@ -97,7 +97,7 @@ class AnimatedTextMod(loader.Module):
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
     async def atcmd(self, message: Message):
-        """Использование: .at <номер> <текст> - Создает текст из эмодзи"""
+        """.at <номер> <текст> - Создает текст из эмодзи"""
         args = utils.get_args_raw(message)
         if not args:
             await message.edit("<b>Введите номер и текст для конвертации!</b>")
