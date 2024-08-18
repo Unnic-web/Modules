@@ -128,8 +128,8 @@ class AnimatedTextMod(loader.Module):
 
         await message.edit(emojified_text)
 
-  async def tsxelpcmd(self, message: Message):
-    """Информация о модуле"""
+    async def atxelpcmd(self, message: Message):
+       """Информация о модуле"""
     instruction = (
         "<b>Информация о паках и их пример как будет выглядеть текст</b>\n"
         "№ - пример текста (Доступно 2 эмодзи пака)\n\n"
