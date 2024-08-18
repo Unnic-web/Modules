@@ -139,4 +139,5 @@ class AnimatedTextMod(loader.Module):
         "Это не потому что я не смог добавить, а потому что в некоторых паках их просто нету</b>\n\n"
         "<emoji document_id=5875452644599795072>🔞</emoji> <b>Разработчик: @unnic</b>\n"
     )   
+        
         await message.edit(instruction, parse_mode='html')
