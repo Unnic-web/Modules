@@ -141,5 +141,4 @@ async def atxelpcmd(self, message: Message):
         )
         await message.edit(instruction, parse_mode="html")
     except Exception as e:
-        # Логирование ошибки или обработка
         print(f"Ошибка: {e}")
