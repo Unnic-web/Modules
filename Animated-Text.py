@@ -126,7 +126,7 @@ class AnimatedTextMod(loader.Module):
 
         await message.edit(emojified_text)
 
-    async def atxelpcmd(self, message: Message):
+async def atxelpcmd(self, message: Message):
     """Информация о модуле"""
     
     try:
@@ -141,4 +141,5 @@ class AnimatedTextMod(loader.Module):
         )
         await message.edit(instruction, parse_mode="html")
     except Exception as e:
+        # Логирование ошибки или обработка
         print(f"Ошибка: {e}")
