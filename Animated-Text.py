@@ -100,8 +100,8 @@ class AnimatedTextMod(loader.Module):
         }
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
-async def atcmd(self, message: Message):
-    """.at <номер> <текст> - Создает текст из эмодзи"""
+    async def atcmd(self, message: Message):
+        """.at <номер> <текст> - Создает текст из эмодзи"""
     args = utils.get_args_raw(message)
     if not args:
         await message.edit("<b>Введите номер и текст для конвертации!</b>")
@@ -138,6 +138,7 @@ async def atcmd(self, message: Message):
             await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте еще раз.</b>")
     else:
         await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
+
 
     async def atxelpcmd(self, message: Message):
         """Информация о модуле и его паках"""
