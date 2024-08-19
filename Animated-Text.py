@@ -102,23 +102,23 @@ class AnimatedTextMod(loader.Module):
 
     async def atcmd(self, message: Message):
         """.at <номер> <текст> - Создает текст из эмодзи"""
-    args = utils.get_args_raw(message)
-    if not args or len((parts := args.split(maxsplit=1))) < 2:
-        return await message.edit("<b>Введите номер и текст для конвертации!</b>")
+        args = utils.get_args_raw(message)
+        if not args or len((parts := args.split(maxsplit=1))) < 2:
+            return await message.edit("<b>Введите номер и текст для конвертации!</b>")
 
-    number, text = parts
-    if not number.isdigit():
-        return await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
+        number, text = parts
+        if not number.isdigit():
+            return await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
 
-    try:
-        emojified_text = (self.text_to_emoji_1(text) if number == '1'
-                          else self.text_to_emoji_2(text) if number == '2'
-                          else None)
-        if emojified_text is None:
-            return await message.edit("<b>Неверный номер! Пожалуйста, используйте 1, или 2.</b>")
-        await message.edit(emojified_text)
-    except Exception:
-        await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте еще раз.</b>")
+        try:
+            emojified_text = (self.text_to_emoji_1(text) if number == '1'
+                              else self.text_to_emoji_2(text) if number == '2'
+                              else None)
+            if emojified_text is None:
+                return await message.edit("<b>Неверный номер! Пожалуйста, используйте 1, или 2.</b>")
+            await message.edit(emojified_text)
+        except Exception:
+            await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте еще раз.</b>")
 
     async def atxelpcmd(self, message: Message):
         """Информация о модуле и его паках"""
@@ -132,4 +132,4 @@ class AnimatedTextMod(loader.Module):
             "<emoji document_id=5875452644599795072>🔞</emoji> <b>Разработчик: @unnic</b>\n"
         )
         await message.edit(instruction, parse_mode='html')
-# Хер
+    # Хер 
