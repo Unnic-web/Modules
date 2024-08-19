@@ -132,4 +132,4 @@ class AnimatedTextMod(loader.Module):
             "<emoji document_id=5875452644599795072>🔞</emoji> <b>Разработчик: @unnic</b>\n"
         )
         await message.edit(instruction, parse_mode='html')
-    # Хер 
+    # Хер # Херня # Хератень # Нахер # Захер # Похер
