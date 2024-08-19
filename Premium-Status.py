@@ -66,3 +66,4 @@ class PremiumStatusMod(loader.Module):
 
         except Exception as e:
             await message.edit(f"<b>Ошибка при получении данных: {e}</b>")
+# Хер # Херня # Хератень # Нахер # Захер # Похер
