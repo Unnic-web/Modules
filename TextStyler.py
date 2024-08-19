@@ -28,6 +28,7 @@ from telethon import events
 from .. import loader, utils
 
 
+
 @loader.tds
 class TextStylerMod(loader.Module):
     """Модуль для автоматического форматирования текста"""
@@ -88,20 +89,21 @@ class TextStylerMod(loader.Module):
         client.add_event_handler(self.message_handler, events.NewMessage(outgoing=True))
 
     def format_text(self, text):
+        formatted_text = text
         if self.config["enable_bold"]:
-            text = f"<b>{text}</b>"
+            formatted_text = f"<b>{formatted_text}</b>"
         if self.config["enable_italic"]:
-            text = f"<i>{text}</i>"
+            formatted_text = f"<i>{formatted_text}</i>"
         if self.config["enable_underlined"]:
-            text = f"<u>{text}</u>"
+            formatted_text = f"<u>{formatted_text}</u>"
         if self.config["enable_strikethrough"]:
-            text = f"<s>{text}</s>"
+            formatted_text = f"<s>{formatted_text}</s>"
         if self.config["enable_mono"]:
-            text = f"<code>{text}</code>"
-        return text
+            formatted_text = f"<code>{formatted_text}</code>"
+
+        return formatted_text
 
     async def message_handler(self, event):
-        # Убедитесь, что игнорируются только каналы, а не супергруппы
         if self.config["ignore_channels"] and event.is_channel and not event.is_group:
             return
 
