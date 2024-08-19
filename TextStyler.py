@@ -37,7 +37,7 @@ class TextStylerMod(loader.Module):
             loader.ConfigValue(
                 "ignore_char",
                 ".",
-                lambda: "Символ, указывающий на игнорирование сообщения, измени на любой другой 1 символ как установлен префис на твоём боте. Это для того, что когда ты в Хикка вводишь через префикс команду, шоб форматирование текста не сбивало результаты той или инной введённой другой команды юзер бота.",
+                lambda: "Символ, указывающий на игнорирование сообщения, измени на любой другой 1 символ как установлен префикс на твоём боте. Это для того, что когда ты в Хикка вводишь через префикс команду, шоб форматирование текста не сбивало результаты той или иной введёной другой команды юзер бота.",
                 validator=loader.validators.String(min_len=1, max_len=1)
             ),
             loader.ConfigValue(
@@ -55,7 +55,7 @@ class TextStylerMod(loader.Module):
             loader.ConfigValue(
                 "enable_strikethrough",
                 False,
-                lambda: "Включить/выключить автозачёркнутый текст",
+                lambda: "Включить/выключить автозачеркнутый текст",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
@@ -75,12 +75,6 @@ class TextStylerMod(loader.Module):
                 True,
                 lambda: "Игнорировать сообщения в каналах",
                 validator=loader.validators.Boolean()
-            ),
-            loader.ConfigValue(
-                "enable_groups",
-                False,
-                lambda: "Включить/выключить автоматическое форматирование в группах",
-                validator=loader.validators.Boolean()
             )
         )
         super().__init__()
@@ -96,9 +90,6 @@ class TextStylerMod(loader.Module):
 
     async def message_handler(self, event: events.NewMessage.Event):
         if self.config["ignore_channels"] and event.is_channel:
-            return
-
-        if not self.config["enable_groups"] and event.is_group:
             return
 
         if event.message.media:
