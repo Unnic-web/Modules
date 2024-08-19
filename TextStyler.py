@@ -27,6 +27,7 @@ import emoji
 from telethon import events
 from .. import loader, utils
 
+
 @loader.tds
 class TextStylerMod(loader.Module):
     """Модуль для автоматического форматирования текста"""
@@ -100,7 +101,8 @@ class TextStylerMod(loader.Module):
         return text
 
     async def message_handler(self, event):
-        if self.config["ignore_channels"] and event.is_channel:
+        # Убедитесь, что игнорируются только каналы, а не супергруппы
+        if self.config["ignore_channels"] and event.is_channel and not event.is_group:
             return
 
         if event.message.media:
