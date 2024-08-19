@@ -53,7 +53,9 @@ class DelMod(loader.Module):
 
         removed_count = 0
         
-        edit_message = await message.edit("<emoji document_id=5188311512791393083>🔎</emoji> <b>Поиск удалённых аккаунтов</b>")
+        edit_message = await utils.answer(message, "<emoji document_id=5188311512791393083>🔎</emoji> <b>Поиск удалённых аккаунтов</b>")
+        if not edit_message:
+            edit_message = message
 
         async for user in self._client.iter_participants(chat):
             if user.deleted:
