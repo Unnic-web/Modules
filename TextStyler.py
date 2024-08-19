@@ -24,6 +24,9 @@ from telethon.tl.types import Message
 from .. import loader, utils
 import emoji
 
+from telethon import events
+from .. import loader, utils
+
 @loader.tds
 class TextStylerMod(loader.Module):
     """Модуль для автоматического форматирования текста"""
@@ -32,7 +35,7 @@ class TextStylerMod(loader.Module):
         "name": "TextStyler"
     }
 
-    def __init__(self):
+    def init(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -77,16 +80,24 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             )
         )
-        super().__init__()
-
-    def format_symbol(self, char, config_name, tag):
-        if self.config[config_name]:
-            return f"<{tag}>{char}</{tag}>"
-        return char
+        super().init()
 
     async def client_ready(self, client, db):
         self._client = client
         client.add_event_handler(self.message_handler, events.NewMessage(outgoing=True))
+
+    def format_text(self, text):
+        if self.config["enable_bold"]:
+            text = f"<b>{text}</b>"
+        if self.config["enable_italic"]:
+            text = f"<i>{text}</i>"
+        if self.config["enable_underlined"]:
+            text = f"<u>{text}</u>"
+        if self.config["enable_strikethrough"]:
+            text = f"<s>{text}</s>"
+        if self.config["enable_mono"]:
+            text = f"<code>{text}</code>"
+        return text
 
     async def message_handler(self, event):
         if self.config["ignore_channels"] and event.is_channel:
@@ -99,25 +110,8 @@ class TextStylerMod(loader.Module):
         if original_message.startswith(self.config["ignore_char"]):
             return 
 
-        # Форматирование сообщения
-        formatted_message = ''.join(
-            self.format_symbol(
-                self.format_symbol(
-                    self.format_symbol(
-                        self.format_symbol(
-                            char,
-                            "enable_bold", "b"
-                        ),
-                        "enable_underlined", "u"
-                    ),
-                    "enable_strikethrough", "s"
-                ),
-                "enable_italic", "i"
-            ) for char in original_message
-        )
-
-        if self.config["enable_mono"]:
-            formatted_message = f"<code>{formatted_message}</code>"
+        # Форматирование всего сообщения
+        formatted_message = self.format_text(original_message)
 
         # Проверка, был ли текст изменён
         if formatted_message != original_message:
