@@ -32,7 +32,7 @@ class TextStylerMod(loader.Module):
         "name": "TextStyler"
     }
 
-    def init(self):
+    def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -83,7 +83,7 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             )
         )
-        super().init()
+        super().__init__()
 
     def format_symbol(self, char, config_name, tag):
         if self.config[config_name]:
