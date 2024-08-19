@@ -100,22 +100,23 @@ class AnimatedTextMod(loader.Module):
         }
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
-    async def atcmd(self, message: Message):
-        """.at <номер> <текст> - Создает текст из эмодзи"""
-        args = utils.get_args_raw(message)
-        if not args:
-            await message.edit("<b>Введите номер и текст для конвертации!</b>")
-            return
+async def atcmd(self, message: Message):
+    """.at <номер> <текст> - Создает текст из эмодзи"""
+    args = utils.get_args_raw(message)
+    if not args:
+        await message.edit("<b>Введите номер и текст для конвертации!</b>")
+        return
 
-        parts = args.split(maxsplit=1)
-        if len(parts) < 2:
-            await message.edit("<b>Введите номер и текст для конвертации!</b>")
-            return
+    parts = args.split(maxsplit=1)
+    if len(parts) < 2:
+        await message.edit("<b>Введите номер и текст для конвертации!</b>")
+        return
 
-        number = parts[0]
-        text = parts[1]
+    number = parts[0]
+    text = parts[1]
 
-        if number.isdigit():
+    if number.isdigit():
+        try:
             if number == '1':
                 emojified_text = self.text_to_emoji_1(text)
             elif number == '2':
@@ -124,11 +125,19 @@ class AnimatedTextMod(loader.Module):
             else:
                 await message.edit("<b>Неверный номер! Пожалуйста, используйте 1, или 2.</b>")
                 return
-        else:
-            await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
-            return
-
-        await message.edit(emojified_text)
+            
+            # Попробуем отредактировать сообщение на emojified_text
+            try:
+                await message.edit(emojified_text)
+            except Exception as e:
+                # Проверка на премиум-статус может быть тут, если бы была доступна соответствующая информация
+                # Логика обработки исключений, например, из-за отсутствия Premium
+                await message.edit(text)
+        except Exception as e:
+            # Здесь можно обработать исключения, которые могут быть связаны с преобразованием текста
+            await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте еще раз.</b>")
+    else:
+        await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
 
     async def atxelpcmd(self, message: Message):
         """Информация о модуле и его паках"""
