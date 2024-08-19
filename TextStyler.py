@@ -32,7 +32,7 @@ class TextStylerMod(loader.Module):
         "name": "TextStyler"
     }
 
-    def __init__(self):
+    def init(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -75,9 +75,15 @@ class TextStylerMod(loader.Module):
                 True,
                 lambda: "Игнорировать сообщения в каналах",
                 validator=loader.validators.Boolean()
+            ),
+            loader.ConfigValue(
+                "enable_groups",
+                False,
+                lambda: "Включить/выключить автоматическое форматирование в группах",
+                validator=loader.validators.Boolean()
             )
         )
-        super().__init__()
+        super().init()
 
     def format_symbol(self, char, config_name, tag):
         if self.config[config_name]:
@@ -90,6 +96,9 @@ class TextStylerMod(loader.Module):
 
     async def message_handler(self, event: events.NewMessage.Event):
         if self.config["ignore_channels"] and event.is_channel:
+            return
+
+        if not self.config["enable_groups"] and event.is_group:
             return
 
         if event.message.media:
@@ -108,11 +117,8 @@ class TextStylerMod(loader.Module):
                 self.format_symbol(
                     self.format_symbol(
                         self.format_symbol(
-                            self.format_symbol(
-                                char,
-                                "enable_bold", "b"
-                            ),
-                            "enable_mono", "code"
+                            char,
+                            "enable_bold", "b"
                         ),
                         "enable_underlined", "u"
                     ),
@@ -121,6 +127,9 @@ class TextStylerMod(loader.Module):
                 "enable_italic", "i"
             ) for char in original_message
         )
+
+        if self.config["enable_mono"]:
+            formatted_message = f"<code>{formatted_message}</code>"
 
         # Проверка, был ли текст изменён
         if formatted_message != original_message:
