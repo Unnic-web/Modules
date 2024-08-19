@@ -37,43 +37,43 @@ class TextStylerMod(loader.Module):
             loader.ConfigValue(
                 "ignore_char",
                 ".",
-                lambda: "Символ, указывающий на игнорирование сообщения, измени на любой другой 1 символ как установлен префикс на твоём боте. Это для того, что когда ты в Хикка вводишь через префикс команду, шоб форматирование текста не сбивало результаты той или иной введёной другой команды юзер бота.",
+                lambda: "Символ, указывающий на игнорирование сообщения.",
                 validator=loader.validators.String(min_len=1, max_len=1)
             ),
             loader.ConfigValue(
                 "enable_bold",
                 False,
-                lambda: "Включить/выключить автоматическое жирное форматирование текста",
+                lambda: "Включить/выключить автоматическое жирное форматирование текста.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
                 "enable_italic",
                 False,
-                lambda: "Включить/выключить автоматическое курсивное форматирование текста",
+                lambda: "Включить/выключить автоматическое курсивное форматирование текста.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
                 "enable_strikethrough",
                 False,
-                lambda: "Включить/выключить автозачеркнутый текст",
+                lambda: "Включить/выключить автозачеркнутый текст.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
                 "enable_underlined",
                 False,
-                lambda: "Включить/выключить автоматическое подчеркивание текста",
+                lambda: "Включить/выключить автоматическое подчеркивание текста.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
                 "enable_mono",
                 False,
-                lambda: "Включить/выключить автоматический моноширинный текст",
+                lambda: "Включить/выключить автоматический моноширинный текст.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
                 "ignore_channels",
                 True,
-                lambda: "Игнорировать сообщения в каналах",
+                lambda: "Игнорировать сообщения в каналах.",
                 validator=loader.validators.Boolean()
             )
         )
@@ -84,11 +84,11 @@ class TextStylerMod(loader.Module):
             return f"<{tag}>{char}</{tag}>"
         return char
 
-    async def client_ready(self, client: TelegramClient, db):
+    async def client_ready(self, client, db):
         self._client = client
         client.add_event_handler(self.message_handler, events.NewMessage(outgoing=True))
 
-    async def message_handler(self, event: events.NewMessage.Event):
+    async def message_handler(self, event):
         if self.config["ignore_channels"] and event.is_channel:
             return
 
@@ -99,10 +99,7 @@ class TextStylerMod(loader.Module):
         if original_message.startswith(self.config["ignore_char"]):
             return 
 
-        # Проверка на наличие только эмодзи (без текстовых символов)
-        if all(char in emoji.EMOJI_DATA for char in original_message):
-            return
-
+        # Форматирование сообщения
         formatted_message = ''.join(
             self.format_symbol(
                 self.format_symbol(
