@@ -32,7 +32,7 @@ class TextStylerMod(loader.Module):
         "name": "TextStyler"
     }
 
-    def init(self):
+    def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -77,7 +77,7 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             )
         )
-        super().init()
+        super().__init__()
 
     async def client_ready(self, client, db):
         self._client = client
