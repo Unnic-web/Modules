@@ -84,22 +84,20 @@ class TextStylerMod(loader.Module):
         client.add_event_handler(self.message_handler, events.NewMessage(outgoing=True))
 
     def format_text(self, text):
-        formatted_text = text
         if self.config["enable_bold"]:
-            formatted_text = f"<b>{formatted_text}</b>"
+            text = f"<b>{text}</b>"
         if self.config["enable_italic"]:
-            formatted_text = f"<i>{formatted_text}</i>"
+            text = f"<i>{text}</i>"
         if self.config["enable_underlined"]:
-            formatted_text = f"<u>{formatted_text}</u>"
+            text = f"<u>{text}</u>"
         if self.config["enable_strikethrough"]:
-            formatted_text = f"<s>{formatted_text}</s>"
+            text = f"<s>{text}</s>"
         if self.config["enable_mono"]:
-            formatted_text = f"<code>{formatted_text}</code>"
-
-        return formatted_text
+            text = f"<code>{text}</code>"
+        return text
 
     async def message_handler(self, event):
-        if self.config["ignore_channels"] and event.is_channel and not event.is_group:
+        if self.config["ignore_channels"] and event.is_channel:
             return
 
         if event.message.media:
