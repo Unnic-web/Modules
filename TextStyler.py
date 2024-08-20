@@ -33,6 +33,7 @@ class TextStylerMod(loader.Module):
     }
 
     def __init__(self):
+        super().init()
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -77,7 +78,6 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             )
         )
-        super().__init__()
 
     async def client_ready(self, client, db):
         self._client = client
@@ -97,11 +97,12 @@ class TextStylerMod(loader.Module):
         return text
 
     async def message_handler(self, event):
-        # Мы хотим обрабатывать личные сообщения и групповые, но игнорировать каналы
+        if not hasattr(self, 'config'):
+            return  # Необходимо исключение или логирование
+
         if self.config["ignore_channels"] and event.is_channel:
             return
 
-        # Если есть медиа, игнорируем сообщение
         if event.message.media:
             return
 
