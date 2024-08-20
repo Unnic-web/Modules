@@ -26,14 +26,14 @@ import emoji
 
 @loader.tds
 class TextStylerMod(loader.Module):
-    """Модуль для автоматического форматирования текста"""
+    """Модуль для форматирования текста в чате"""
 
     strings = {
         "name": "TextStyler"
     }
 
     def __init__(self):
-        super().init()
+        super().__init__()
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -72,16 +72,16 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
-                "ignore_channels",
-                True,
-                lambda: "Игнорировать сообщения в каналах.",
+                "ignore_formatting",
+                False,
+                lambda: "Игнорировать форматирование текста для сообщений в канале.",
                 validator=loader.validators.Boolean()
             )
         )
 
     async def client_ready(self, client, db):
         self._client = client
-        client.add_event_handler(self.message_handler, events.NewMessage(outgoing=True))
+        client.add_event_handler(self.message_handler, events.NewMessage())
 
     def format_text(self, text):
         if self.config["enable_bold"]:
@@ -97,25 +97,36 @@ class TextStylerMod(loader.Module):
         return text
 
     async def message_handler(self, event):
-        if not hasattr(self, 'config'):
-            return  # Необходимо исключение или логирование
+        try:
+            if not hasattr(self, 'config'):
+                return
 
-        if self.config["ignore_channels"] and event.is_channel:
-            return
+            original_message = event.raw_text
 
-        if event.message.media:
-            return
+            # Игнорируем сообщения с медиафайлами
+            if event.message.media:
+                return
 
-        original_message = event.raw_text
-        if original_message.startswith(self.config["ignore_char"]):
-            return 
+            # Игнорируем сообщения, начинающиеся с указанного символа
+            if original_message.startswith(self.config["ignore_char"]):
+                return
 
-        # Форматирование всего сообщения
-        formatted_message = self.format_text(original_message)
+            # Если сообщение из канала и игнорирование форматирования включено,
+            # но оно пришло в чат, который не является чисто каналом
+            if (event.is_channel and self.config["ignore_formatting"]) and not (event.is_group or event.is_private):
+                return  # Не изменяем сообщение
 
-        # Проверка, был ли текст изменён
-        if formatted_message != original_message:
-            await event.edit(formatted_message, parse_mode='html')
+            # Форматирование текста для групп и личных сообщений (включая сообщения из канала)
+            formatted_message = self.format_text(original_message)
+
+            # Если текст изменился, редактируем сообщение
+            # Добавим проверку на пустое сообщение
+            if formatted_message and formatted_message != original_message:
+                await event.edit(formatted_message, parse_mode='html')
+
+        except Exception as e:
+            print(f"Error in message_handler: {e}")  # Логирование ошибки
+            # Вы можете добавить любой способ логирования, если требуется
 
     async def tsxelpcmd(self, message: Message):
         """Показывает инструкцию по использованию модуля."""
