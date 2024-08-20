@@ -97,9 +97,11 @@ class TextStylerMod(loader.Module):
         return text
 
     async def message_handler(self, event):
+        # Мы хотим обрабатывать личные сообщения и групповые, но игнорировать каналы
         if self.config["ignore_channels"] and event.is_channel:
             return
 
+        # Если есть медиа, игнорируем сообщение
         if event.message.media:
             return
 
