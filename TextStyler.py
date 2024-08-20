@@ -24,11 +24,6 @@ from telethon.tl.types import Message
 from .. import loader, utils
 import emoji
 
-from telethon import events
-from .. import loader, utils
-
-
-
 @loader.tds
 class TextStylerMod(loader.Module):
     """Модуль для автоматического форматирования текста"""
@@ -37,7 +32,7 @@ class TextStylerMod(loader.Module):
         "name": "TextStyler"
     }
 
-    def __init__(self):
+    def init(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "ignore_char",
@@ -82,7 +77,7 @@ class TextStylerMod(loader.Module):
                 validator=loader.validators.Boolean()
             )
         )
-        super().__init__()
+        super().init()
 
     async def client_ready(self, client, db):
         self._client = client
