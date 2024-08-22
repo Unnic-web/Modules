@@ -30,7 +30,7 @@ class БылMod(loader.Module):
     async def логcmd(self, message: Message):
         """Прежде чем, прочти инструкцию"""
         if not message.chat:
-            await message.edit("<b>Ошибка!</b>")
+            await message.edit("<emoji document_id=5443055905836903328>❗️</emoji> <b>Ошибка!</b>")
             return
         chat = message.chat
 
@@ -47,7 +47,7 @@ class БылMod(loader.Module):
         f.seek(0)
         await message.client.send_file("me", f, caption="ID Чата: " + str(chat.id))
 
-        await message.edit("<b>Сделал то что ты хотел, лог в избранном.</b>")
+        await message.edit("<b><emoji document_id=5445156432607454501>✅</emoji> Сделал то что ты хотел, лог в избранном.</b>")
         f.close()
 
     async def иcmd(self, message: Message):
@@ -68,7 +68,7 @@ class БылMod(loader.Module):
 
         user_initials = f"{user.first_name} {user.last_name}" if user.first_name and user.last_name else user.first_name
         user_id = user.id
-        await message.edit(f'<emoji document_id=5972282179776940830>✈️</emoji> <a href="tg://openmessage?user_id={user_id}"><b>{user_initials}</b></a>\n<emoji document_id=4918133202012340741>👤</emoji> <code>@{user_id}</code>')
+        await message.edit(f'<emoji document_id=5445109840802227336>🛫</emoji> <a href="tg://openmessage?user_id={user_id}"><b>{user_initials}</b></a>\n<emoji document_id=5442848669369903303>📧</emoji> <code>@{user_id}</code>')
 
     async def тегcmd(self, message: Message):
         """Тегает всех админов чата, игнорируя ботов"""
@@ -95,7 +95,7 @@ class БылMod(loader.Module):
         """Показать информацию по команде .лог"""
         instruction = (
             "<b>Информация:\n\n"
-            "Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
+            "<emoji document_id=5442796494107191902>🔓</emoji> Команда <code>.лог</code> выполняет дамп чата, создавая файл, содержащий список всех участников, "
             "и отправляет его в «Избранное». Это полезно для архивирования и анализа данных о пользователях чата.</b>\n"
         )
 
