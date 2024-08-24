@@ -40,7 +40,7 @@ class TextStylerMod(loader.Module):
                 ".",
                 lambda: "Префикс, указывающий на игнорирование сообщения.",
                 validator=loader.validators.String(min_len=1, max_len=1)
-            )
+            ),
             loader.ConfigValue(
                 "enable_bold",
                 False,
