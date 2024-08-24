@@ -38,9 +38,9 @@ class TextStylerMod(loader.Module):
             loader.ConfigValue(
                 "ignore_char",
                 ".",
-                lambda: "Символ, указывающий на игнорирование сообщения.",
+                lambda: "Префикс, указывающий на игнорирование сообщения.",
                 validator=loader.validators.String(min_len=1, max_len=1)
-            ),
+            )
             loader.ConfigValue(
                 "enable_bold",
                 False,
@@ -63,6 +63,12 @@ class TextStylerMod(loader.Module):
                 "enable_underlined",
                 False,
                 lambda: "Включить/выключить автоматическое подчеркивание текста.",
+                validator=loader.validators.Boolean()
+            ),
+            loader.ConfigValue(
+                "enable_spoiler",
+                False,
+                lambda: "Включить/выключить автоматический скрытый текст.",
                 validator=loader.validators.Boolean()
             ),
             loader.ConfigValue(
@@ -92,6 +98,8 @@ class TextStylerMod(loader.Module):
             text = f"<u>{text}</u>"
         if self.config["enable_strikethrough"]:
             text = f"<s>{text}</s>"
+        if self.config["enable_spoiler"]:
+            text = f"<tg-spoiler>{text}</tg-spoiler>"
         if self.config["enable_mono"]:
             text = f"<code>{text}</code>"
         return text
