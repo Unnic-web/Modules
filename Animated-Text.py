@@ -1,4 +1,4 @@
-__version__ = (1, 0, 0)
+__version__ = (1, 0, 1)
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ© Copyright 2024
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤhttps://t.me/unnic
 # 🔒ㅤㅤㅤㅤㅤLicensed under the GNU AGPLv3
@@ -12,7 +12,7 @@ __version__ = (1, 0, 0)
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # meta banner: https://t.me/HikkTutor
-# meta developer: @unnic
+# meta developer: @HikkTutor
 #██╗░░░██╗███╗░░██╗███╗░░██╗██╗░█████╗░
 #██║░░░██║████╗░██║████╗░██║██║██╔══██╗
 #██║░░░██║██╔██╗██║██╔██╗██║██║██║░░╚═╝
@@ -100,36 +100,171 @@ class AnimatedTextMod(loader.Module):
         }
         return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
+    @staticmethod
+    def text_to_emoji_3(text):
+        """<b>Эмодзи версия 3</b>"""
+        emoji_alphabet = {
+            'А': '<emoji document_id=5287303134505354202>👹</emoji>', 'Б': '<emoji document_id=5289712602568474408>👹</emoji>',
+            'В': '<emoji document_id=5289704957526686747>👹</emoji>', 'Г': '<emoji document_id=5289782507456183851>👹</emoji>',
+            'Д': '<emoji document_id=5289626754762165532>👹</emoji>', 'Е': '<emoji document_id=5289924421765578917>👹</emoji>',
+            'Ё': '<emoji document_id=5289887270298468670>👹</emoji>', 'Ж': '<emoji document_id=5289735005117889676>👹</emoji>',
+            'З': '<emoji document_id=5289809479850803428>👹</emoji>', 'И': '<emoji document_id=5289940974569536102>👹</emoji>',
+            'Й': '<emoji document_id=5289585016269977970>👹</emoji>', 'К': '<emoji document_id=5289497952987921680>👹</emoji>',
+            'Л': '<emoji document_id=5289517473614284146>👹</emoji>', 'М': '<emoji document_id=5289487468972751583>👹</emoji>',
+            'Н': '<emoji document_id=5289941936642211700>👹</emoji>', 'О': '<emoji document_id=5287556696489608885>👹</emoji>',
+            'П': '<emoji document_id=5287245891181232169>👹</emoji>', 'Р': '<emoji document_id=5289537879003905183>👹</emoji>',
+            'С': '<emoji document_id=5289638518677585780>👹</emoji>', 'Т': '<emoji document_id=5287463779167124747>👹</emoji>',
+            'У': '<emoji document_id=5289930554978878064>👹</emoji>', 'Ф': '<emoji document_id=5289519140061593185>👹</emoji>',
+            'Х': '<emoji document_id=5287285864441856463>👹</emoji>', 'Ц': '<emoji document_id=5289710137257246054>👹</emoji>',
+            'Ч': '<emoji document_id=5289631973147428193>👹</emoji>', 'Ш': '<emoji document_id=5287603279704901279>👹</emoji>',
+            'Щ': '<emoji document_id=5289686008130977390>👹</emoji>', 'Ъ': '<emoji document_id=5289993502019567158>👹</emoji>',
+            'Ы': '<emoji document_id=5289768553107439293>👹</emoji>', 'Ь': '<emoji document_id=5289532278366551155>👹</emoji>',
+            'Э': '<emoji document_id=5289539051529975781>👹</emoji>', 'Ю': '<emoji document_id=5289736181938928696>👹</emoji>',
+            'Я': '<emoji document_id=5289862376668019845>👹</emoji>', '0': '<emoji document_id=5289632093406510233>👹</emoji>',
+            '1': '<emoji document_id=5287430931257245340>👹</emoji>', '2': '<emoji document_id=5287526000358343284>👹</emoji>',
+            '3': '<emoji document_id=5287769563658733174>👹</emoji>', '4': '<emoji document_id=5289976588438353349>👹</emoji>',
+            '5': '<emoji document_id=5290003981739768423>👹</emoji>', '6': '<emoji document_id=5289540125271800062>👹</emoji>',
+            '7': '<emoji document_id=5287348296086471622>👹</emoji>', '8': '<emoji document_id=5289681429695839216>👹</emoji>',
+            '9': '<emoji document_id=5290023429351686274>👹</emoji>',
+        }
+        return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
+
+    @staticmethod
+    def text_to_emoji_4(text):
+        """<b>Эмодзи версия 4</b>"""
+        emoji_alphabet = {
+            'А': '<emoji document_id=5242434345603441736>😀</emoji>', 'Б': '<emoji document_id=5242670122128123193>😤</emoji>',
+            'В': '<emoji document_id=5242247729274432503>🤔</emoji>', 'Г': '<emoji document_id=5242715811990218731>😞</emoji>',
+            'Д': '<emoji document_id=5242410607319197689>😉</emoji>', 'Е': '<emoji document_id=5242375027810117782>😃</emoji>',
+            'Ё': '<emoji document_id=5242412123442652870>😞</emoji>', 'Ж': '<emoji document_id=5242302288243992483>🤨</emoji>',
+            'З': '<emoji document_id=5242222066844837762>😠</emoji>', 'И': '<emoji document_id=5242217552834208944>🤣</emoji>',
+            'Й': '<emoji document_id=5244571285106731156>😃</emoji>', 'К': '<emoji document_id=5242275530597738033>🤣</emoji>',
+            'Л': '<emoji document_id=5242579223440271422>😣</emoji>', 'М': '<emoji document_id=5242459020190558814>😃</emoji>',
+            'Н': '<emoji document_id=5242602875825170178>😍</emoji>', 'О': '<emoji document_id=5242627876829800669>😶‍🌫️</emoji>',
+            'П': '<emoji document_id=5244611911202384851>😯</emoji>', 'Р': '<emoji document_id=5242204762421602006>😚</emoji>',
+            'С': '<emoji document_id=5242459346608072238>😞</emoji>', 'Т': '<emoji document_id=5242686125176269211>🤔</emoji>',
+            'У': '<emoji document_id=5242260313528609101>😶‍🌫️</emoji>', 'Ф': '<emoji document_id=5242738253194340808>😠</emoji>',
+            'Х': '<emoji document_id=5242454179762416237>😀</emoji>', 'Ц': '<emoji document_id=5244927153211975204>😋</emoji>',
+            'Ч': '<emoji document_id=5242262001450757430>🤔</emoji>', 'Ш': '<emoji document_id=5242492035604162920>🤔</emoji>',
+            'Щ': '<emoji document_id=5244945119060175623>😡</emoji>', 'Ъ': '<emoji document_id=5242672054863408501>🥺</emoji>',
+            'Ы': '<emoji document_id=5244805081651488041>😱</emoji>', 'Ь': '<emoji document_id=5242420429909404389>🤔</emoji>',
+            'Э': '<emoji document_id=5244842241708535702>😕</emoji>', 'Ю': '<emoji document_id=5244733402942286508>😊</emoji>',
+            'Я': '<emoji document_id=5244596891701750883>😐</emoji>', '0': '<emoji document_id=5242296064836381345>☹️</emoji>',
+            '1': '<emoji document_id=5242633284193626695>🤥</emoji>', '2': '<emoji document_id=5242725385472322786>😯</emoji>',
+            '3': '<emoji document_id=5244493370105014334>🥶</emoji>', '4': '<emoji document_id=5244864519703898337>😦</emoji>',
+            '5': '<emoji document_id=5244881686688180520>🫢</emoji>', '6': '<emoji document_id=5242334521973550934>🫥</emoji>',
+            '7': '<emoji document_id=5242235256689405269>😴</emoji>', '8': '<emoji document_id=5244793171707177560>😱</emoji>',
+            '9': '<emoji document_id=5244684556279229932>😖</emoji>',
+        }
+        return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
+
+    @staticmethod
+    def text_to_emoji_5(text):
+        """<b>Эмодзи версия 5</b>"""
+        emoji_alphabet = {
+            'А': '<emoji document_id=5226945619792243285>😖</emoji>', 'Б': '<emoji document_id=5226438384154584560>🤫</emoji>',
+            'В': '<emoji document_id=5224222679246055440>😠</emoji>', 'Г': '<emoji document_id=5226850812684149668>😍</emoji>',
+            'Д': '<emoji document_id=5224260595217343427>🥸</emoji>', 'Е': '<emoji document_id=5224691732624452174>🤬</emoji>',
+            'Ё': '<emoji document_id=5224605077364287676>😕</emoji>', 'Ж': '<emoji document_id=5224336440044824391>🤭</emoji>',
+            'З': '<emoji document_id=5224181378840536245>😶‍🌫️</emoji>', 'И': '<emoji document_id=5224352009301272109>🤔</emoji>',
+            'Й': '<emoji document_id=5224265607444179698>😩</emoji>', 'К': '<emoji document_id=5224477701519189598>🤩</emoji>',
+            'Л': '<emoji document_id=5224231063022216565>😀</emoji>', 'М': '<emoji document_id=5224705266066401209>🫥</emoji>',
+            'Н': '<emoji document_id=5224737834803406452>😰</emoji>', 'О': '<emoji document_id=5224630907297605900>🥹</emoji>',
+            'П': '<emoji document_id=5224659928391624793>😏</emoji>', 'Р': '<emoji document_id=5224622287298241845>😔</emoji>',
+            'С': '<emoji document_id=5226692461534915371>😋</emoji>', 'Т': '<emoji document_id=5226866957466215713>😋</emoji>',
+            'У': '<emoji document_id=5226903142565685511>😱</emoji>', 'Ф': '<emoji document_id=5226935522324130905>😱</emoji>',
+            'Х': '<emoji document_id=5224470271225767805>😟</emoji>', 'Ц': '<emoji document_id=5224343204618315900>😩</emoji>',
+            'Ч': '<emoji document_id=5226475475492152705>😫</emoji>', 'Ш': '<emoji document_id=5224536628470491029>😩</emoji>',
+            'Щ': '<emoji document_id=5224212006252325301>😔</emoji>', 'Ъ': '<emoji document_id=5224318761959435985>😋</emoji>',
+            'Ы': '<emoji document_id=5226531125383406931>🤔</emoji>', 'Ь': '<emoji document_id=5224501207875201282>😵‍💫</emoji>',
+            'Э': '<emoji document_id=5224360019415280764>😒</emoji>', 'Ю': '<emoji document_id=5226428724773137412>😏</emoji>',
+            'Я': '<emoji document_id=5226847630113384308>😞</emoji>', '0': '<emoji document_id=5224214707786755815>😤</emoji>',
+            '1': '<emoji document_id=5226914919366011400>😩</emoji>', '2': '<emoji document_id=5224720646344288047>🤓</emoji>',
+            '3': '<emoji document_id=5224529077917984873>😣</emoji>', '4': '<emoji document_id=5226988655364550094>😩</emoji>',
+            '5': '<emoji document_id=5226917071144625165>😤</emoji>', '6': '<emoji document_id=5224505116295441519>🙃</emoji>',
+            '7': '<emoji document_id=5224477667159450867>😞</emoji>', '8': '<emoji document_id=5226794832080416109>😤</emoji>',
+            '9': '<emoji document_id=5224281082211346720>😬</emoji>',
+        }
+        return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
+
+    @staticmethod
+    def text_to_emoji_6(text):
+        """<b>Эмодзи версия 6</b>"""
+        emoji_alphabet = {
+            'А': '<emoji document_id=5294045769303602921>🔠</emoji>', 'Б': '<emoji document_id=5293983114320689817>🔠</emoji>',
+            'В': '<emoji document_id=5294264808340730409>🔠</emoji>', 'Г': '<emoji document_id=5294345648215177157>🔠</emoji>',
+            'Д': '<emoji document_id=5294293631866255791>🔠</emoji>', 'Е': '<emoji document_id=5296567138444652725>🔠</emoji>',
+            'Ё': '<emoji document_id=5294389061744605754>🔠</emoji>', 'Ж': '<emoji document_id=5294211640940574737>🔠</emoji>',
+            'З': '<emoji document_id=5294226711980817435>🔠</emoji>', 'И': '<emoji document_id=5294288993301575690>🔠</emoji>',
+            'Й': '<emoji document_id=5294515436862323653>🔠</emoji>', 'К': '<emoji document_id=5293987289028899188>🔠</emoji>',
+            'Л': '<emoji document_id=5296417295625628315>🔠</emoji>', 'М': '<emoji document_id=5294539200916371033>🔠</emoji>',
+            'Н': '<emoji document_id=5294293739240436441>🔠</emoji>', 'О': '<emoji document_id=5294236654830105823>🔠</emoji>',
+            'П': '<emoji document_id=5294512791162467627>🔠</emoji>', 'Р': '<emoji document_id=5294013419609929758>🔠</emoji>',
+            'С': '<emoji document_id=5294402285948909146>🔠</emoji>', 'Т': '<emoji document_id=5294057047887721184>🔠</emoji>',
+            'У': '<emoji document_id=5294392257200272822>🔠</emoji>', 'Ф': '<emoji document_id=5293983277529444749>🔠</emoji>',
+            'Х': '<emoji document_id=5294460057554007147>🔠</emoji>', 'Ц': '<emoji document_id=5294340996765594000>🔠</emoji>',
+            'Ч': '<emoji document_id=5294496633495499938>🔠</emoji>', 'Ш': '<emoji document_id=5294259126099000266>🔠</emoji>',
+            'Щ': '<emoji document_id=5294424795872506050>🔠</emoji>', 'Ъ': '<emoji document_id=5294161209434585048>🔠</emoji>',
+            'Ы': '<emoji document_id=5294436319269762781>🔠</emoji>', 'Ь': '<emoji document_id=5296589824461908985>🔠</emoji>',
+            'Э': '<emoji document_id=5294402006776035730>🔠</emoji>', 'Ю': '<emoji document_id=5294074326541152345>🔠</emoji>',
+            'Я': '<emoji document_id=5296501120502344545>🔠</emoji>', '0': '<emoji document_id=5294526633842062765>0️⃣</emoji>',
+            '1': '<emoji document_id=5294062292042790600>1️⃣</emoji>', '2': '<emoji document_id=5294532526537192148>2️⃣</emoji>',
+            '3': '<emoji document_id=5294169996937669833>3️⃣</emoji>', '4': '<emoji document_id=5294520011002491171>🔢</emoji>',
+            '5': '<emoji document_id=5294471125684729755>5️⃣</emoji>', '6': '<emoji document_id=5294323778241705542>6️⃣</emoji>',
+            '7': '<emoji document_id=5294260272855266205>7️⃣</emoji>', '8': '<emoji document_id=5294013926416069801>8️⃣</emoji>',
+            '9': '<emoji document_id=5293990862441689244>9️⃣</emoji>',
+        }
+        return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
+    
     async def atcmd(self, message: Message):
         """.at <номер> <текст> - Создает текст из эмодзи"""
         args = utils.get_args_raw(message)
         if not args or len((parts := args.split(maxsplit=1))) < 2:
-            return await message.edit("<b>Введите номер и текст для конвертации!</b>")
+            return await message.edit("<b>Введите номер и текст для конвертации!"
+                                      "Пример: <code>.at 2 текст</code></b>"
+                                     )
 
         number, text = parts
         if not number.isdigit():
-            return await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>")
+            return await message.edit("<b>Неверный номер! Пожалуйста, используйте только целые числа.</b>"
+                                      "\n\nПример команды: <code>.at 2 Текст</code> \n\nРезультат будет таким: " 
+                                      "<emoji document_id=5442819107110004737>🔤</emoji>"
+                                      "<emoji document_id=5195169080914486911>🔤</emoji>"
+                                      "<emoji document_id=5456289915551622074>🔤</emoji>"
+                                      "<emoji document_id=5463032576119679082>🔤</emoji>"
+                                      "<emoji document_id=5442819107110004737>🔤</emoji>"
+                                     )
 
         try:
             emojified_text = (self.text_to_emoji_1(text) if number == '1'
                               else self.text_to_emoji_2(text) if number == '2'
+                              else self.text_to_emoji_3(text) if number == '3'
+                              else self.text_to_emoji_4(text) if number == '4'
+                              else self.text_to_emoji_5(text) if number == '5'
+                              else self.text_to_emoji_6(text) if number == '6'
                               else None)
             if emojified_text is None:
-                return await message.edit("<b>Неверный номер! Пожалуйста, используйте 1, или 2.</b>")
+                return await message.edit("<b>Неверный номер! Пожалуйста, используйте 1-2 и так далее до 6.</b>")
             await message.edit(emojified_text)
         except Exception:
-            await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте еще раз.</b>")
+            await message.edit("<b>Произошла ошибка при преобразовании текста. Пожалуйста, попробуйте ещё раз.</b>")
 
     async def atxelpcmd(self, message: Message):
         """Информация о модуле и его паках"""
         instruction = (
             "<b>Инфо о паках и их пример как будет выглядеть текст</b>\n"
-            "№ - пример текста (Доступно 2 эмодзи пака)\n\n"
-            "1 - <emoji document_id=5431799754331796642>🔤</emoji>\n"
-            "2 - <emoji document_id=5442667851246742007>🔤</emoji>\n\n"
-            "<emoji document_id=5818865088970362886>❕</emoji> <b>В этих функционалах нету, знаков ?!+-= и так делее.\n"
-            "Это не потому что я не смог добавить, а потому что в некоторых паках их просто нету</b>\n\n"
-            "<emoji document_id=5875452644599795072>🔞</emoji> <b>Разработчик: @unnic</b>\n"
+            "№ - пример текста (Доступно 6 эмодзи паков)\n\n"
+            "1 - <emoji document_id=5431799754331796642>🔤</emoji>"
+            " | 2 - <emoji document_id=5442667851246742007>🔤</emoji>"
+            " | 3 - <emoji document_id=5287303134505354202>👹</emoji>\n"
+            "4 - <emoji document_id=5242434345603441736>😀</emoji>"
+            " | 5 - <emoji document_id=5226945619792243285>😖</emoji>"
+            " | 6 - <emoji document_id=5294045769303602921>🔠</emoji>\n\n"
+            "<emoji document_id=5818865088970362886>❕</emoji> <b>В этих функционалах нету знаков ?!+-= и так делее.\n"
+            "Это не потому что Разработчик не смог добавить, а потому что в некоторых паках их просто нету</b>\n\n"
+            "<emoji document_id=5454390891466726015>👋</emoji> <b>Developer: @unnic</b>\n"
         )
         await message.edit(instruction, parse_mode='html')
-    # Хер # Херня # Хератень # Нахер # Захер # Похер
+        # Хер # Херня # Хератень # Нахер # Захер # Похер
+        # Может быть                     # Не может быть
+
