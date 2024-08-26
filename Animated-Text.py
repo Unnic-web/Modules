@@ -221,7 +221,7 @@ class AnimatedTextMod(loader.Module):
         args = utils.get_args_raw(message)
         if not args or len((parts := args.split(maxsplit=1))) < 2:
             return await message.edit("<b>Введите номер и текст для конвертации!"
-                                      "Пример: <code>.at 2 текст</code></b>"
+                                      "\nПример: <code>.at 2 текст</code></b>"
                                      )
 
         number, text = parts
