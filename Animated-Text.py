@@ -125,7 +125,7 @@ def text_to_emoji_3(text):
         '3': '<emoji document_id=5287769563658733174>👹</emoji>', '4': '<emoji document_id=5289976588438353349>👹</emoji>',
         '5': '<emoji document_id=5290003981739768423>👹</emoji>', '6': '<emoji document_id=5289540125271800062>👹</emoji>',
         '7': '<emoji document_id=5287348296086471622>👹</emoji>', '8': '<emoji document_id=5289681429695839216>👹</emoji>',
-        '9': '<emoji document_id=5290023429351686274>👹</emoji>'
+        '9': '<emoji document_id=5290023429351686274>👹</emoji>',
     }
     return ''.join([emoji_alphabet.get(char.upper(), char) if char != ' ' else '   ' for char in text]) + 'ㅤ'
 
