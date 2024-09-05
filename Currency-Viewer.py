@@ -1,4 +1,4 @@
-__version__ = (1, 0, 0)
+__version__ = (1, 0, 1)
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ© Copyright 2024
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤhttps://t.me/unnic
 # 🔒ㅤㅤㅤㅤㅤLicensed under the GNU AGPLv3
@@ -20,13 +20,12 @@ __version__ = (1, 0, 0)
 #╚██████╔╝██║░╚███║██║░╚███║██║╚█████╔╝
 #░╚═════╝░╚═╝░░╚══╝╚═╝░░╚══╝╚═╝░╚════╝
 
-from .. import loader, utils
-from telethon.tl.types import Message
+from .. import loader, utils # Александр
+from telethon.tl.types import Message # type: ignore
 import requests
-import asyncio
 
-class CurrencyMod(loader.Module):
-    """Модуль для просмотра валют"""
+class CurrencyMod(loader.Module): # Александр
+    """Модуль для сравнения курсов"""
 
     strings = {
         "name": "Currency",
@@ -35,8 +34,8 @@ class CurrencyMod(loader.Module):
         "currency_not_supported": "<emoji document_id=5787544344906959608>ℹ️</emoji> <b>Данная валюта не поддерживается. Пожалуйста, проверьте правильность названия.</b>"
     }
 
-    async def cryptocmd(self, message: Message):
-        """Используйте .crypto <число> <название валюты>."""
+    async def cvcmd(self, message: Message): # Александр
+        """Используйте .cv <число> <название валюты>."""
         args = utils.get_args_raw(message)
         tray = "RUB"
         if not args:
@@ -50,10 +49,9 @@ class CurrencyMod(loader.Module):
             args_list = ["1", args_list[0]]
         
         currency = args_list[1].upper()
-        api_url = f"https://min-api.cryptocompare.com/data/price?fsym={currency}&tsyms=USD,RUB,UAH,KZT,EUR,BYN,TON,NOT"
+        api_url = f"https://min-api.cryptocompare.com/data/price?fsym={currency}&tsyms=USD,RUB,UAH,KZT,EUR,BYN,GBP,CHF,JPY,TON,NOT"
         api_response = requests.get(api_url).json()
 
-        # Проверяем, доступна ли валюта
         if 'Response' in api_response and api_response['Response'] == 'Error':
             await utils.answer(message, self.strings("currency_not_supported"))
             return
@@ -62,14 +60,17 @@ class CurrencyMod(loader.Module):
             count = float(args_list[0])
             form = (
                 "<b>Поиск по курсу: {} {}</b>\n<b>Свежие результаты:</b>\n\n"
-                "<emoji document_id=5202021044105257611>🇺🇸</emoji> <code>{}$ </code> Долар\n"
-                "<emoji document_id=5449408995691341691>🇷🇺</emoji> <code>{}₽ </code> Рубль\n"
-                "<emoji document_id=5447309366568953338>🇺🇦</emoji> <code>{}₴ </code> Гривна\n"
-                "<emoji document_id=5228718354658769982>🇰🇿</emoji> <code>{}₸ </code> Тенге\n"
-                "<emoji document_id=5228784522924930237>🇪🇺</emoji> <code>{}€ </code> Евро\n"
-                "<emoji document_id=5382219601054544127>🇧🇾</emoji> <code>{}Br</code> Бун\n"
-                "<emoji document_id=5253691721174234015>💎</emoji> <code>{}₮ </code> Тонкоин\n"
-                "<emoji document_id=5379965911455256722>💎</emoji> <code>{}₵ </code> Ноткоин\n"
+                "<code>{}$ </code> Долар\n"
+                "<code>{}₽ </code> Рубль\n"
+                "<code>{}₴ </code> Гривна\n"
+                "<code>{}₸ </code> Тенге\n"
+                "<code>{}€ </code> Евро\n"
+                "<code>{}Br</code> Бун\n"
+                "<code>{}£ </code> Фунт\n"
+                "<code>{}₣ </code> Франк\n"
+                "<code>{}¥ </code> Йена\n"
+                "<code>{}₮ </code> Тонкоин\n"
+                "<code>{}₵ </code> Ноткоин\n"
             ).format(
                 count,
                 currency,
@@ -79,8 +80,11 @@ class CurrencyMod(loader.Module):
                 round(api_response.get("KZT", 0) * count, 2),
                 round(api_response.get("EUR", 0) * count, 2),
                 round(api_response.get("BYN", 0) * count, 2),
+                round(api_response.get("GBP", 0) * count, 2), 
+                round(api_response.get("CHF", 0) * count, 2),
+                round(api_response.get("JPY", 0) * count, 2),
                 round(api_response.get("TON", 0) * count, 2),
-                round(api_response.get("NOT", 0) * count, 2) 
+                round(api_response.get("NOT", 0) * count, 2)
             )
 
             result_message = await utils.answer(message, form)
@@ -89,3 +93,26 @@ class CurrencyMod(loader.Module):
         except ValueError:
             await utils.answer(message, self.strings("inc_args"))
 
+
+    async def cvicmd(self, message: Message): # Всякое и Александр
+        """Список доступных валют"""
+        instruction = (
+            "<b>Список валют</b>\n\n"
+            "<code>USD</code> <b>(Долар)</b>\n"
+            "<code>RUB</code> <b>(Рубль)</b>\n"
+            "<code>UAH</code> <b>(Гривна)</b>\n"
+            "<code>KZT</code> <b>(Тенге)</b>\n"
+            "<code>EUR</code> <b>(Евро)</b>\n"
+            "<code>BYN</code> <b>(Бун)</b>\n"
+            "<code>JPY</code> <b>(Йена)</b>\n"
+            "<code>GBP</code> <b>(Фунт)</b>\n"
+            "<code>CHF</code> <b>(Франк)</b>\n\n"
+            "<code>TON</code> <b>(Тонкоин)</b>\n"
+            "<code>NOT</code> <b>(Ноткоин)</b>\n\n"
+            "<b>Использовать через:</b> <code>.cv</code> <количество> <название>"
+        )
+        await message.edit(instruction, parse_mode='html')
+        # Хер # Херня # Хератень # Нахер # Захер # Похер
+        # Может быть                     # Не может быть
+		# Идея Александра              # Кодер Александр 
+	    # Авторы    модуля    Александр     и     Всякое
