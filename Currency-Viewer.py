@@ -103,7 +103,7 @@ class CurrencyMod(loader.Module):
         user = await message.get_sender()
         is_premium = user.premium
         instruction = (
-           "<b>Список валют</b>\n\n"
+           "<b>Список валют:</b>\n\n"
            f"{'🇺🇸' if not is_premium else '<emoji document_id=5202021044105257611>🇺🇸</emoji>'}"
            "<code>USD</code><b>(Доллар)</b>\n"
            f"{'🇷🇺' if not is_premium else '<emoji document_id=5449408995691341691>🇷🇺</emoji>'}"
