@@ -24,7 +24,7 @@ from .. import loader, utils
 from telethon.tl.types import Message  # type: ignore
 import requests
 
-# ---------------------Module-----------------------
+# ---------------------Module-----------------------#
 class CurrencyMod(loader.Module):
     """Модуль для сравнения курсов"""
 
@@ -35,7 +35,7 @@ class CurrencyMod(loader.Module):
         "currency_not_supported": "ℹ️ <b>Данная валюта не поддерживается. Пожалуйста, проверьте правильность названия.</b>"
     }
 
-    # ---------------Tagged functionality----------------
+    # ---------------Tagged functionality---------------- #
     async def cvcmd(self, message: Message):
         """Используйте .cv «число» «название валюты»."""
         args = utils.get_args_raw(message)
@@ -96,7 +96,7 @@ class CurrencyMod(loader.Module):
 
         except ValueError:await utils.answer(message, self.strings("inc_args"))
 
-    #-------Functionality with list and with tags-------
+    # -------Functionality with list and with tags------- #
     async def cvicmd(self, message: Message):
         """Список доступных валют"""
     
@@ -135,3 +135,5 @@ class CurrencyMod(loader.Module):
         # Идея Александра              # Кодер Александр 
         # Авторы     модуля    Александр    и     Всякое
         # Код не пиздием и не меняйте иначе засужу нахуй
+        # Автор не несёт ответ за твои последствия падла
+        # Не    будь    ебланом   не    лезь   в  модуль
