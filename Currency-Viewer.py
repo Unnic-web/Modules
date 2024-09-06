@@ -105,7 +105,7 @@ class CurrencyMod(loader.Module):
         instruction = (
            "<b>Список валют:</b>\n\n"
            f"{'🇺🇸' if not is_premium else '<emoji document_id=5202021044105257611>🇺🇸</emoji>'}"
-           "<code>USD</code><b>(Доллар)</b>\n"
+           "<code>USD</code> <b>(Доллар)</b>\n"
            f"{'🇷🇺' if not is_premium else '<emoji document_id=5449408995691341691>🇷🇺</emoji>'}"
            "<code>RUB</code> <b>(Рубль)</b>\n"
            f"{'🇺🇦' if not is_premium else '<emoji document_id=5447309366568953338>🇺🇦</emoji>'}"
@@ -126,7 +126,8 @@ class CurrencyMod(loader.Module):
            "<code>TON</code> <b>(Тонкоин)</b>\n"
            f"{'⚫️' if not is_premium else '<emoji document_id=5379965911455256722>💎</emoji>'}"
            "<code>NOT</code> <b>(Ноткоин)</b>\n\n"
-           "<b>Использовать через:</b> <code>.cv</code> «число» «название»"
+           "<b>Использовать через:</b> <code>.cv</code> «число» «название»\n"
+           "Пример: <code>.cv 20 RUB</code>"
         )
         await message.edit(instruction, parse_mode='html')
         
