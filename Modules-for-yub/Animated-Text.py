@@ -319,4 +319,4 @@ class AnimatedTextMod(loader.Module):
         )
         await message.edit(instruction, parse_mode='html')
         # Хер # Херня # Хератень # Нахер # Захер # Похер
-        # Может быть                     # Не может быть
+        # Может быть                     # Не может быть 
