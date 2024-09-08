@@ -1,3 +1,3 @@
 # Modules
 
-![IMG_20240828_182119_727.png](https://github.com/user-attachments/assets/4166da52-3c89-46b8-891f-10afb90737f1)
+![IMG_20240908_144134_535.jpg](https://github.com/user-attachments/assets/7d360974-0d0d-4c57-974f-5649f4d690c5)
