@@ -94,8 +94,8 @@ class CurrencyMod(loader.Module):
                 if curr == currency:
                     continue
 
-                value = round(api_response.get(curr, 0) * count, 2) 
-                value_str = f"{value:,.2f}".replace(",", "X").replace(".", " ").replace("X", ",")
+                value = api_response.get(curr, 0) * count
+                value_str = "{:,.2f}".format(value).replace(",", " ").replace(".", ",")
 
                 if is_premium:
                     flag = emoji_symbols.get(curr, "")
@@ -108,6 +108,7 @@ class CurrencyMod(loader.Module):
 
         except KeyError:
             await utils.answer(message, self.strings("keyerror"))
+
         except ValueError:
             await utils.answer(message, self.strings("inc_args"))
 
