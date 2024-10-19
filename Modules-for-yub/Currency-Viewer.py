@@ -94,8 +94,8 @@ class CurrencyMod(loader.Module):
                 if curr == currency:
                     continue
 
-                value = round(api_response.get(curr, 0) * count, 2)
-                value_str = f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+                value = round(api_response.get(curr, 0) * count, 2) 
+                value_str = f"{value:,.2f}".replace(",", "X").replace(".", " ").replace("X", ",")
 
                 if is_premium:
                     flag = emoji_symbols.get(curr, "")
