@@ -1,4 +1,4 @@
-__version__ = (1, 0, 2)
+__version__ = (1, 0, 3)
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ© Copyright 2024
 #ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤhttps://t.me/unnic
 # 🔒ㅤㅤㅤㅤㅤLicensed under the GNU AGPLv3
@@ -13,18 +13,22 @@ __version__ = (1, 0, 2)
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # meta banner: https://t.me/HikkTutor
 # meta developer: @unnic
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #██╗░░░██╗███╗░░██╗███╗░░██╗██╗░█████╗░
 #██║░░░██║████╗░██║████╗░██║██║██╔══██╗
 #██║░░░██║██╔██╗██║██╔██╗██║██║██║░░╚═╝
 #██║░░░██║██║╚████║██║╚████║██║██║░░██╗
 #╚██████╔╝██║░╚███║██║░╚███║██║╚█████╔╝
 #░╚═════╝░╚═╝░░╚══╝╚═╝░░╚══╝╚═╝░╚════╝
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 from .. import loader, utils
 from telethon.tl.types import Message  # type: ignore
-import requests
+import requests # type: ignore
 
-# ---------------------Module-----------------------#
+# ---------------------Module-----------------------
 class CurrencyMod(loader.Module):
     """Модуль для сравнения курсов"""
 
@@ -35,9 +39,9 @@ class CurrencyMod(loader.Module):
         "currency_not_supported": "ℹ️ <b>Данная валюта не поддерживается. Пожалуйста, проверьте правильность названия.</b>"
     }
 
-    # ---------------Tagged functionality---------------- #
+# ---------------Tagged functionality----------------
     async def cvcmd(self, message: Message):
-        """Используйте .cv «число» «название валюты»."""
+        """Используйте .cv <число> <название валюты>."""
         args = utils.get_args_raw(message)
         tray = "RUB"
         if not args:
@@ -64,73 +68,83 @@ class CurrencyMod(loader.Module):
         try:
             count = float(args_list[0])
 
-            form = (
-                f"<b>Поиск по курсу: {count} {currency}</b>\n<b>Свежие результаты:</b>\n\n"
-                f"{'🇺🇸 ' if not is_premium else '<emoji document_id=5202021044105257611>🇺🇸</emoji>'} "
-                f"<code>{round(api_response.get('USD', 0) * count, 2)}$</code> Доллар\n"
-                f"{'🇷🇺 ' if not is_premium else '<emoji document_id=5449408995691341691>🇷🇺</emoji>'} "
-                f"<code>{round(api_response.get('RUB', 0) * count, 2)}₽</code> Рубль\n"
-                f"{'🇺🇦 ' if not is_premium else '<emoji document_id=5447309366568953338>🇺🇦</emoji>'} "
-                f"<code>{round(api_response.get('UAH', 0) * count, 2)}₴</code> Гривна\n"
-                f"{'🇰🇿 ' if not is_premium else '<emoji document_id=5228718354658769982>🇰🇿</emoji>'} "
-                f"<code>{round(api_response.get('KZT', 0) * count, 2)}₸</code> Тенге\n"
-                f"{'🇪🇺 ' if not is_premium else '<emoji document_id=5228784522924930237>🇪🇺</emoji>'} "
-                f"<code>{round(api_response.get('EUR', 0) * count, 2)}€</code> Евро\n"
-                f"{'🇧🇾 ' if not is_premium else '<emoji document_id=5382219601054544127>🇧🇾</emoji>'} "
-                f"<code>{round(api_response.get('BYN', 0) * count, 2)}Br</code> Бун\n"
-                f"{'🇬🇧 ' if not is_premium else '<emoji document_id=5202196682497859879>🇬🇧</emoji>'} "
-                f"<code>{round(api_response.get('GBP', 0) * count, 2)}£</code> Фунт\n"
-                f"{'🇨🇭 ' if not is_premium else '<emoji document_id=5442703336266543270>🇨🇭</emoji>'} "
-                f"<code>{round(api_response.get('CHF', 0) * count, 2)}₣</code> Франк\n"
-                f"{'🇯🇵 ' if not is_premium else '<emoji document_id=5456261908069885892>🇯🇵</emoji>'} "
-                f"<code>{round(api_response.get('JPY', 0) * count, 2)}¥</code> Йена\n"
-                f"{'🔵 ' if not is_premium else '<emoji document_id=5253691721174234015>💎</emoji>'} "
-                f"<code>{round(api_response.get('TON', 0) * count, 2)}₮</code> Тонкоин\n"
-                f"{'⚫️ ' if not is_premium else '<emoji document_id=5379965911455256722>💎</emoji>'} "
-                f"<code>{round(api_response.get('NOT', 0) * count, 2)}₵</code> Ноткоин\n"
-            )
-            result_message = await utils.answer(message, form)
+            currency_symbols = {
+                "USD": "🇺🇸", "RUB": "🇷🇺", "UAH": "🇺🇦", "KZT": "🇰🇿", "EUR": "🇪🇺", 
+                "BYN": "🇧🇾", "GBP": "🇬🇧", "CHF": "🇨🇭", "JPY": "🇯🇵", "TON": "🔵", 
+                "NOT": "⚫️"
+            }
+
+            emoji_symbols = {
+                "USD": "<emoji document_id=5202021044105257611>🇺🇸</emoji>", 
+                "RUB": "<emoji document_id=5449408995691341691>🇷🇺</emoji>",
+                "UAH": "<emoji document_id=5447309366568953338>🇺🇦</emoji>", 
+                "KZT": "<emoji document_id=5228718354658769982>🇰🇿</emoji>",
+                "EUR": "<emoji document_id=5228784522924930237>🇪🇺</emoji>", 
+                "BYN": "<emoji document_id=5382219601054544127>🇧🇾</emoji>",
+                "GBP": "<emoji document_id=5202196682497859879>🇬🇧</emoji>", 
+                "CHF": "<emoji document_id=5442703336266543270>🇨🇭</emoji>",
+                "JPY": "<emoji document_id=5456261908069885892>🇯🇵</emoji>", 
+                "TON": "<emoji document_id=5253691721174234015>💎</emoji>",
+                "NOT": "<emoji document_id=5379965911455256722>💎</emoji>"
+            }
+
+            form = f"<b>Поиск по курсу: {count} {currency}</b>\n<b>Свежие результаты:</b>\n\n"
+
+            for curr, symbol in currency_symbols.items():
+                if curr == currency:
+                    continue
+
+                value = round(api_response.get(curr, 0) * count, 2)
+                value_str = f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+                if is_premium:
+                    flag = emoji_symbols.get(curr, "")
+                else:
+                    flag = symbol
+
+                form += f"{flag} <code>{value_str}</code> {curr}\n"
+
+            await utils.answer(message, form)
 
         except KeyError:
             await utils.answer(message, self.strings("keyerror"))
+        except ValueError:
+            await utils.answer(message, self.strings("inc_args"))
 
-        except ValueError:await utils.answer(message, self.strings("inc_args"))
-
-    # -------Functionality with list and with tags------- #
+#-------Functionality with list and with tags-------
     async def cvicmd(self, message: Message):
         """Список доступных валют"""
     
         user = await message.get_sender()
         is_premium = user.premium
         instruction = (
-           "<b>Список валют:</b>\n\n"
-           f"{'🇺🇸 ' if not is_premium else '<emoji document_id=5202021044105257611>🇺🇸</emoji>'} "
-           "<code>USD</code> <b>(Доллар)</b>\n"
-           f"{'🇷🇺 ' if not is_premium else '<emoji document_id=5449408995691341691>🇷🇺</emoji>'} "
+           "<b>Список валют</b>\n\n"
+           f"{'🇺🇸' if not is_premium else '<emoji document_id=5202021044105257611>🇺🇸</emoji>'}"
+           "<code>USD</code><b>(Доллар)</b>\n"
+           f"{'🇷🇺' if not is_premium else '<emoji document_id=5449408995691341691>🇷🇺</emoji>'}"
            "<code>RUB</code> <b>(Рубль)</b>\n"
-           f"{'🇺🇦 ' if not is_premium else '<emoji document_id=5447309366568953338>🇺🇦</emoji>'} "
+           f"{'🇺🇦' if not is_premium else '<emoji document_id=5447309366568953338>🇺🇦</emoji>'}"
            "<code>UAH</code> <b>(Гривна)</b>\n"
-           f"{'🇰🇿 ' if not is_premium else '<emoji document_id=5228718354658769982>🇰🇿</emoji>'} "
+           f"{'🇰🇿' if not is_premium else '<emoji document_id=5228718354658769982>🇰🇿</emoji>'}"
            "<code>KZT</code> <b>(Тенге)</b>\n"
-           f"{'🇪🇺 ' if not is_premium else '<emoji document_id=5228784522924930237>🇪🇺</emoji>'} "
+           f"{'🇪🇺' if not is_premium else '<emoji document_id=5228784522924930237>🇪🇺</emoji>'}"
            "<code>EUR</code> <b>(Евро)</b>\n"
-           f"{'🇧🇾 ' if not is_premium else '<emoji document_id=5382219601054544127>🇧🇾</emoji>'} "
+           f"{'🇧🇾' if not is_premium else '<emoji document_id=5382219601054544127>🇧🇾</emoji>'}"
            "<code>BYN</code> <b>(Бун)</b>\n"
-           f"{'🇬🇧 ' if not is_premium else '<emoji document_id=5202196682497859879>🇬🇧</emoji>'} "
+           f"{'🇬🇧' if not is_premium else '<emoji document_id=5202196682497859879>🇬🇧</emoji>'}"
            "<code>GBP</code> <b>(Фунт)</b>\n"
-           f"{'🇨🇭 ' if not is_premium else '<emoji document_id=5442703336266543270>🇨🇭</emoji>'} "
+           f"{'🇨🇭' if not is_premium else '<emoji document_id=5442703336266543270>🇨🇭</emoji>'}"
            "<code>CHF</code> <b>(Франк)</b>\n"
-           f"{'🇯🇵 ' if not is_premium else '<emoji document_id=5456261908069885892>🇯🇵</emoji>'} "
+           f"{'🇯🇵' if not is_premium else '<emoji document_id=5456261908069885892>🇯🇵</emoji>'}"
            "<code>JPY</code> <b>(Йена)</b>\n"
-           f"{'🔵 ' if not is_premium else '<emoji document_id=5253691721174234015>💎</emoji>'} "
+           f"{'🔵' if not is_premium else '<emoji document_id=5253691721174234015>💎</emoji>'}"
            "<code>TON</code> <b>(Тонкоин)</b>\n"
-           f"{'⚫️ ' if not is_premium else '<emoji document_id=5379965911455256722>💎</emoji>'} "
+           f"{'⚫️' if not is_premium else '<emoji document_id=5379965911455256722>💎</emoji>'}"
            "<code>NOT</code> <b>(Ноткоин)</b>\n\n"
-           "<b>Использовать через:</b> <code>.cv</code> «число» «название»\n"
-           "<b>Пример:</b> <code>.cv 20 RUB</code>"
+           "<b>Использовать через:</b> <code>.cv</code><число> <название>"
         )
         await message.edit(instruction, parse_mode='html')
-        
+
         # Хер # Херня # Хератень # Нахер # Захер # Похер
         # Может быть                     # Не может быть
         # Идея Александра              # Кодер Александр 
