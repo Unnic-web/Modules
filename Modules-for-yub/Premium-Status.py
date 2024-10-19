@@ -41,7 +41,7 @@ class PremiumStatusMod(loader.Module):
 
     async def otcmd(self, message):
         """Отображает информацию о подписке Telegram Premium. Используйте: .ot"""
-        await message.edit("<b>Получаем данные, пожалуйста подождите...</b>")
+        await message.edit("<b>Получаю данные, пожалуйста подожди...</b>")
 
         try:
             bot_username = 'PremiumBot'
@@ -66,4 +66,5 @@ class PremiumStatusMod(loader.Module):
 
         except Exception as e:
             await message.edit(f"<b>Ошибка при получении данных: {e}</b>")
+
 # Хер # Херня # Хератень # Нахер # Захер # Похер
